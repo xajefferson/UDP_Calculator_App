@@ -1,117 +1,46 @@
-import java.io.*;
-import java.net.*;
+// Java program to illustrate Client side
+// Implementation using DatagramSocket
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.Scanner;
 
-public class Client {
-
-	public static void main(String args[])
-		throws IOException, InterruptedException
+public class Client
+{
+	public static void main(String args[]) throws IOException
 	{
+		Scanner sc = new Scanner(System.in);
+		String server_IP = "192.168.0.11";
 
-		// create DatagramSocket and get ip
-		DatagramSocket cs
-			= new DatagramSocket(5334);
-		InetAddress ip
-			= InetAddress.getLocalHost();
+		// Step 1:Create the socket object for
+		// carrying the data.
+		DatagramSocket ds = new DatagramSocket();
 
-		System.out.println("Running UnSyncChatClient.java");
+		//InetAddress ip = InetAddress.getLocalHost();
+		InetAddress ip = InetAddress.getByName(server_IP);
+		byte buf[] = null;
 
-		System.out.println("Client is Up....");
+		// loop while user not enters "bye"
+		while (true)
+		{
+			String inp = sc.nextLine();
 
-		// create a sender thread with a nested
-		// runnable class definition
-		Thread csend;
-		csend = new Thread(new Runnable() {
-			@Override
-			public void run()
-			{
-				try {
-					Scanner sc = new Scanner(System.in);
-					while (true) {
-						synchronized (this)
-						{
-							byte[] sd = new byte[1000];
+			// convert the String input into the byte array.
+			buf = inp.getBytes();
 
-							// scan new message to send
-							sd = sc.nextLine().getBytes();
+			// Step 2 : Create the datagramPacket for sending
+			// the data.
+			DatagramPacket DpSend =
+				new DatagramPacket(buf, buf.length, ip, 1234);
 
-							// create datagram packet
-							// for new message
-							DatagramPacket sp
-								= new DatagramPacket(
-									sd,
-									sd.length,
-									ip,
-									1234);
+			// Step 3 : invoke the send call to actually send
+			// the data.
+			ds.send(DpSend);
 
-							// send the new packet
-							cs.send(sp);
-
-							String msg = new String(sd);
-							System.out.println("Client says: "
-											+ msg);
-							// exit condition
-							if (msg.equals("bye")) {
-								System.out.println("client "
-												+ "exiting... ");
-								break;
-							}
-							System.out.println("Waiting for "
-											+ "server response...");
-						}
-					}
-				}
-				catch (IOException e) {
-					System.out.println("Exception occured");
-				}
-			}
-		});
-
-		// create a receiver thread with a nested
-		// runnable class definition
-		Thread creceive;
-		creceive = new Thread(new Runnable() {
-			@Override
-			public void run()
-			{
-				try {
-
-					while (true) {
-						synchronized (this)
-						{
-
-							byte[] rd = new byte[1000];
-
-							// receive new message
-							DatagramPacket sp1
-								= new DatagramPacket(
-									rd,
-									rd.length);
-							cs.receive(sp1);
-
-							// convert byte data to string
-							String msg = (new String(rd)).trim();
-							System.out.println("Server: " + msg);
-
-							// exit condition
-							if (msg.equals("bye")) {
-								System.out.println("Server"
-												+ " Stopped....");
-								break;
-							}
-						}
-					}
-				}
-				catch (IOException e) {
-					System.out.println("Exception occured");
-				}
-			}
-		});
-
-		csend.start();
-		creceive.start();
-
-		csend.join();
-		creceive.join();
+			// break the loop if user enters "bye"
+			if (inp.equals("bye"))
+				break;
+		}
 	}
 }

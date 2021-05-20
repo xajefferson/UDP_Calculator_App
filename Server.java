@@ -1,115 +1,64 @@
-import java.net.*;
-import java.io.*;
-import java.util.*;
+// Java program to illustrate Server side
+// Implementation using DatagramSocket
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.SocketException;
+import java.util.concurrent.TimeUnit;
 
-public class Server {
-
-	public static void main(String args[])
-		throws IOException, InterruptedException
+public class Server
+{
+	public static void main(String[] args) throws IOException
 	{
+		// Step 1 : Create a socket to listen at port 1234
+		DatagramSocket ds = new DatagramSocket(1234);
+		byte[] receive = new byte[65535];
 
-		// Create DatagramSocket and get ip
-		DatagramSocket ss = new DatagramSocket(1234);
-		InetAddress ip = InetAddress.getLocalHost();
+		DatagramPacket DpReceive = null;
+		while (true)
+		{
 
-		System.out.println("Running UnSyncChatServer.java");
+			// Step 2 : create a DatgramPacket to receive the data.
+			DpReceive = new DatagramPacket(receive, receive.length);
 
-		System.out.println("Server is Up....");
+			// Step 3 : revieve the data in byte buffer.
+			ds.receive(DpReceive);
 
-		// Create a sender thread
-		// with a nested runnable class definition
-		Thread ssend;
-		ssend = new Thread(new Runnable() {
-			@Override
-			public void run()
+			InetAddress remote_IP = DpReceive.getAddress();
+
+			System.out.println("Client:-" + data(receive));
+			//String ip=(((InetSocketAddress) ds.getRemoteSocketAddress()).getAddress()).toString().replace("/","");
+			//System.out.println("Client IP: " + ip);
+			//Byte remote_IP = (InetAddress) ds.getRemoteSocketAddress().getAddress().toString();
+			System.out.println("Client IP: " + remote_IP.toString().replace("/",""));
+
+			// Exit the server if the client sends "bye"
+			if (data(receive).toString().equals("bye"))
 			{
-				try {
-					Scanner sc = new Scanner(System.in);
-					while (true) {
-						synchronized (this)
-						{
-							byte[] sd = new byte[1000];
-
-							// scan new message to send
-							sd = sc.nextLine().getBytes();
-							DatagramPacket sp
-								= new DatagramPacket(
-									sd,
-									sd.length,
-									ip,
-									5334);
-
-							// send the new packet
-							ss.send(sp);
-
-							String msg = new String(sd);
-							System.out.println("Server says: "
-											+ msg);
-
-							// exit condition
-							if ((msg).equals("bye")) {
-								System.out.println("Server"
-												+ " exiting... ");
-								break;
-							}
-							System.out.println("Waiting for"
-											+ " client response... ");
-						}
-					}
-				}
-				catch (Exception e) {
-					System.out.println("Exception occured");
-				}
+				System.out.println("Client sent bye.....EXITING");
+				break;
 			}
-		});
 
-		Thread sreceive;
-		sreceive = new Thread(new Runnable() {
-			@Override
-			public void run()
-			{
-				try {
-					while (true) {
-						synchronized (this)
-						{
+			// Clear the buffer after every message.
+			receive = new byte[65535];
+		}
+	}
 
-							byte[] rd = new byte[1000];
-
-							// Receive new message
-							DatagramPacket sp1
-								= new DatagramPacket(
-									rd,
-									rd.length);
-							ss.receive(sp1);
-
-							// Convert byte data to string
-							String msg
-								= (new String(rd)).trim();
-							System.out.println("Client ("
-											+ sp1.getPort()
-											+ "):"
-											+ " "
-											+ msg);
-
-							// Exit condition
-							if (msg.equals("bye")) {
-								System.out.println("Client"
-												+ " connection closed.");
-								break;
-							}
-						}
-					}
-				}
-				catch (Exception e) {
-					System.out.println("Exception occured");
-				}
-			}
-		});
-
-		ssend.start();
-		sreceive.start();
-
-		ssend.join();
-		sreceive.join();
+	// A utility method to convert the byte array
+	// data into a string representation.
+	public static StringBuilder data(byte[] a)
+	{
+		if (a == null)
+			return null;
+		StringBuilder ret = new StringBuilder();
+		int i = 0;
+		while (a[i] != 0)
+		{
+			ret.append((char) a[i]);
+			i++;
+		}
+		return ret;
 	}
 }

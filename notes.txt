@@ -1,1 +1,6 @@
-Todo: I will be using Json for string transfers 
+ssh -o 'SetEnv INSTANCE="0"' xjeffer@zone.cs.siue.edu
+ssh -o 'SetEnv INSTANCE="1"' xjeffer@zone.cs.siue.edu
+ssh -o 'SetEnv INSTANCE="2"' xjeffer@zone.cs.siue.edu
+
+scp -o 'SetEnv INSTANCE="0"' Client.java xjeffer@zone.cs.siue.edu:/root
+scp -o 'SetEnv INSTANCE="1"' Server.java xjeffer@zone.cs.siue.edu:/root
