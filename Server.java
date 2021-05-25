@@ -8,6 +8,8 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.SocketException;
 import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
+
 
 
 public class Server
@@ -40,8 +42,12 @@ public class Server
 			System.out.println("Client Socket Address: " + remote_socket_address.toString().replace("/", ""));
 			System.out.println("Client Port: " + remote_port); 
 
+			String res = Commands.parseCommand(Utility.data(receive).toString());
 			Utility.sendResponse(remote_IP, remote_port, 200, "OK");
 
+			System.out.println("The commands response is: " + res);
+
+	
 			// Exit the server if the client sends "bye"
 			if (Utility.data(receive).toString().equals("BYE"))
 			{
