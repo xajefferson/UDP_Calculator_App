@@ -5,7 +5,7 @@ import java.net.SocketAddress;
 
 public class Commands {
 
-    public static void helo(InetAddress client_ip, int client_port, SocketAddress client_socket_address) {
+    public static void helo(InetAddress client_ip, int client_port, SocketAddress client_socket_address, Ledger l) {
         //This is where a client will be added to the ledger
 
         //TODO: check if client already exist in ledger if they do, send 503 error, if not, create client object and add them 
@@ -27,6 +27,7 @@ public class Commands {
     public static void sphere(String[] client_command_array, User client) {
         //Update 3 bools to false
         //set circleTriggered to true
+        //Send ready response 
 
 
     }

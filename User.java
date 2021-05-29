@@ -8,14 +8,18 @@ public class User {
     int user_port;
     SocketAddress user_socket_address;
 
-    Boolean circle_triggered = false;
-    Boolean sphere_triggered = false;
-    Boolean cylinder_triggered = false;
+    Boolean circle_triggered;
+    Boolean sphere_triggered;
+    Boolean cylinder_triggered;
 
     public User(InetAddress user_IP, int user_port, SocketAddress user_socket_address){
         this.user_IP = user_IP;
         this.user_port = user_port;
         this.user_socket_address = user_socket_address;
+
+        circle_triggered = false;
+        sphere_triggered = false;
+        cylinder_triggered = false;
     }
 
     public InetAddress getUserIP(){

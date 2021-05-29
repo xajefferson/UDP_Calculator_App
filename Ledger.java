@@ -1,8 +1,7 @@
-import java.net.Socket;
+
 import java.net.SocketAddress;
 import java.util.Hashtable;
-
-import javax.swing.text.StyledEditorKit.BoldAction;
+import java.util.Map;
 
 public class Ledger {
 
@@ -19,7 +18,7 @@ public class Ledger {
     }
     
 
-    public User getClientObject(SocketAddress addr){
+    public User getClientFromLedger(SocketAddress addr){
         return ht.get(addr);
     }
 
@@ -27,14 +26,17 @@ public class Ledger {
         ht.replace(addr, client);
     }
 
-    public void printLedger(){
-        //TODO: Test print ledger
-        System.out.println(ht.toString());
+    public void printUserFromLedger(SocketAddress addr){
+        //TODO: check printLedger for how to wreite this 
     }
+
+    //TODO: add pring function to print user from ledger
 
     public Boolean socketAddrExists(SocketAddress addr){
        return ht.containsKey(addr);
     }
+
+ 
 
     public void addClientToLedger(SocketAddress addr, User client){
         ht.put(addr, client);
@@ -43,5 +45,11 @@ public class Ledger {
     public void removeClientFromLedger(SocketAddress addr){
         String removed = ht.remove(addr).toString();
         System.out.print("Client Removed From Ledger\n----------------------------" + removed);
+    }
+
+    public void printLedger(){
+        for (Map.Entry m:ht.entrySet()){
+            System.out.println("User key: " + m.getKey().toString() + "\nValues: " + m.getValue().toString() + "----------------------\n\n");
+        }
     }
 }

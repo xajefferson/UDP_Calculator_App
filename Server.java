@@ -22,8 +22,9 @@ public class Server
 	{
 		//TODO: Add code to parse server.conf
 		//TODO: add code to create ledger
-
+		Ledger l = new Ledger();
 		
+
 
 		int server_port  = 	1234;
 
