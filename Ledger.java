@@ -28,9 +28,12 @@ public class Ledger {
 
     public void printUserFromLedger(SocketAddress addr){
         //TODO: check printLedger for how to wreite this 
+        System.out.println(ht.get(addr).toString());
     }
 
     //TODO: add pring function to print user from ledger
+
+
 
     public Boolean socketAddrExists(SocketAddress addr){
        return ht.containsKey(addr);
@@ -48,7 +51,7 @@ public class Ledger {
     }
 
     public void printLedger(){
-        for (Map.Entry m:ht.entrySet()){
+        for (Map.Entry<SocketAddress, User> m:ht.entrySet()){
             System.out.println("User key: " + m.getKey().toString() + "\nValues: " + m.getValue().toString() + "----------------------\n\n");
         }
     }

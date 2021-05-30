@@ -4,13 +4,13 @@ import java.net.SocketAddress;
 public class User {
 
 
-    InetAddress user_IP;
-    int user_port;
-    SocketAddress user_socket_address;
+    private InetAddress user_IP;
+    private int user_port;
+    private SocketAddress user_socket_address;
 
-    Boolean circle_triggered;
-    Boolean sphere_triggered;
-    Boolean cylinder_triggered;
+    private Boolean circle_triggered;
+    private Boolean sphere_triggered;
+    private Boolean cylinder_triggered;
 
     public User(InetAddress user_IP, int user_port, SocketAddress user_socket_address){
         this.user_IP = user_IP;

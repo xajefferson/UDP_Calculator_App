@@ -48,59 +48,88 @@ public class Utility {
 		return ret;
 	}
 
-	public static String getCommand(String command) {
+	public static String getCommand(String[] command) {
 
-        System.out.println("The commands command is: " + command.substring(0, 4));
 
-        if (command.substring(0, 4).equals("HELO")) {
-            System.out.println("Command was: " + command.substring(0, 4));
+        System.out.println("The client's command is: " + command[0]);
+
+        if (command[0].equals("HELO") && (command.length == 2)) {
+            System.out.println("Command was: " + command[0]);
             return "HELO";
 
-        } else if (command.substring(0, 4).equals("HELP")) {
-            System.out.println("Command was: " + command.substring(0, 4));
+        } else if (command[0].equals("HELP")&& (command.length == 1)) {
+            System.out.println("Command was: " + command[0]);
             return "HELP";
-        } else if (command.substring(0, 6).equals("CIRCLE")) {
-            System.out.println("Command was: " + command.substring(0, 6));
+        } else if (command[0].equals("CIRCLE")&& (command.length == 1)) {
+            System.out.println("Command was: " + command[0]);
             return "CIRCLE";
 
-        } else if (command.substring(0, 6).equals("SPHERE")) {
-            System.out.println("Command was: " + command.substring(0, 6));
+        } else if (command[0].equals("SPHERE")&& (command.length == 1)) {
+            System.out.println("Command was: " + command[0]);
             return "SPHERE";
 
-        } else if (command.substring(0, 8).equals("CYLINDER")) {
-            System.out.println("Command was: " + command.substring(0, 8));
+        } else if (command[0].equals("CYLINDER")&& (command.length == 1)) {
+            System.out.println("Command was: " + command[0]);
             return "CYLINDER";
 
-        } else if (command.substring(0, 4).equals("AREA")) {
-            System.out.println("Command was: " + command.substring(0, 4));
-            return "AREA";
+        } else if (command[0].equals("AREA") && (command.length == 2)) {
+            System.out.println("Command was: CIRCLE AREA");
+            return "CIRCLE AREA";
 
-        } else if (command.substring(0, 8).equals("CYLINDER")) { //TODO: add sub commands
-			//To seperate commands: https://stackoverflow.com/questions/3214002/splitting-a-space-separated-list
-            System.out.println("Command was: " + command.substring(0, 8));
-            return "CYLINDER";
+        } else if (command[0].equals("AREA") && (command.length == 3)) {
+            System.out.println("Command was: CYLINDER AREA");
+            return "CYLINDER AREA";
 
-        } else if (command.substring(0, 3).equals("BYE")) {
-            System.out.println("Command was: " + command.substring(0, 3));
+        } else if (command[0].equals("HGT")&& (command.length == 3)) {
+            System.out.println("Command was: " + command[0]);
+            return "HGT";
+        } else if (command[0].equals("CIRC")&& (command.length == 2)) {
+            System.out.println("Command was: " + command[0]);
+            return "CIRC";
+        }  else if (command[0].equals("VOL")&& (command.length == 2)) {
+            System.out.println("Command was: " + command[0]);
+            return "VOL";
+        }  else if (command[0].equals("RAD")&& (command.length == 2)) {
+            System.out.println("Command was: " + command[0]);
+            return "RAD";
+        }  else if (command[0].equals("BYE")&& (command.length == 2)) {
+            System.out.println("Command was: " + command[0]);
             return "BYE";
-        } else
+        } else if (command[0].equals("BYEEE")&&(command.length == 1)){
+            return "BYEEE";
+        }
+        
+        else
             return "command unrecognized";
 
         
     }
 
+    
+
+    public static double convert_string_to_double(String s){
+        System.out.println("Convert string to double called");
+        
+        try{
+            double num = Double.valueOf(s);
+            return num;
+        } catch(Exception e){
+            return -1.0; 
+        }
+    }
+
     public static Boolean check_array_for_spaces(String[] to_check){
 
-
+        System.out.println("Check array for spaces function called...");
         for (int i = 0; i< to_check.length; i++){
-            if (to_check[i].contains(" ")) {
+            //System.out.println(to_check[i]);
+            if (to_check[i].contains("\\s") || to_check[i] == "") {
+                System.out.println("Space found");
                 return true; 
             }
-
         }
-
+        System.out.println("Space not found");
         return false;
     }
 
-    
 }
