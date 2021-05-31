@@ -25,6 +25,11 @@ public class Commands {
         l.addClientToLedger(client_socket_address, newUser);
         String msg = "HELO " + client_ip.toString().replace("/", "") + "(UDP)";
         Utility.sendResponse(client_ip, client_port, 200, msg);
+
+
+        System.out.println("Client added to ledger: \n");
+        l.printUserFromLedger(client_socket_address);
+
         return;
     }
 
@@ -168,6 +173,7 @@ public class Commands {
 
         //Valud number was recieved now send response to client
         String to_send = String.valueOf(Calculations.calcCircArea(converted_result));
+        //System.out.println("to send value: " + to_send);
 
         Utility.sendResponse(client.getUserIP(), client.getUserPort(), 250, to_send);
         return;

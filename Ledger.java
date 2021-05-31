@@ -31,7 +31,6 @@ public class Ledger {
         System.out.println(ht.get(addr).toString());
     }
 
-    //TODO: add pring function to print user from ledger
 
 
 
@@ -52,7 +51,7 @@ public class Ledger {
 
     public void printLedger(){
         for (Map.Entry<SocketAddress, User> m:ht.entrySet()){
-            System.out.println("User key: " + m.getKey().toString() + "\nValues: " + m.getValue().toString() + "----------------------\n\n");
+            System.out.println("User key: " + m.getKey().toString() + "\nValues: " + m.getValue().toString() + "_________________________\n");
         }
     }
 }

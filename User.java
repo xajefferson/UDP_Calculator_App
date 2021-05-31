@@ -60,8 +60,8 @@ public class User {
 
     @Override
     public String toString(){
-        return String.format("User IP: %s\n User Port: %d\n User Socket Address: %s\n" +
-        "circle_triggered: %B\nsphere_triggered: %B\n cylinder_triggered: %B", 
+        return String.format("User IP: %s\nUser Port: %d\nUser Socket Address: %s\n" +
+        "circle_triggered: %B\nsphere_triggered: %B\ncylinder_triggered: %B\n\n", 
         user_IP.toString(), user_port, user_socket_address.toString(), circle_triggered,
         sphere_triggered, cylinder_triggered);
     }

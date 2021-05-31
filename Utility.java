@@ -51,7 +51,7 @@ public class Utility {
 	public static String getCommand(String[] command) {
 
 
-        System.out.println("The client's command is: " + command[0]);
+        //System.out.println("The client's command is: " + command[0]);
 
         if (command[0].equals("HELO") && (command.length == 2)) {
             System.out.println("Command was: " + command[0]);
@@ -120,15 +120,15 @@ public class Utility {
 
     public static Boolean check_array_for_spaces(String[] to_check){
 
-        System.out.println("Check array for spaces function called...");
+        //System.out.println("Check array for spaces function called...");
         for (int i = 0; i< to_check.length; i++){
             //System.out.println(to_check[i]);
             if (to_check[i].contains("\\s") || to_check[i] == "") {
-                System.out.println("Space found");
+                //System.out.println("Space found");
                 return true; 
             }
         }
-        System.out.println("Space not found");
+        //System.out.println("Space not found");
         return false;
     }
 

@@ -31,6 +31,7 @@ public class Client
 			server_response = new DatagramPacket(receive, receive.length);
 
 			System.out.print("Enter command: ");
+			//System.out.println((1.0/2.0) * Math.sqrt(20/Math.PI));
 			String inp = sc.nextLine();
 			inp = inp.toUpperCase();
 
@@ -47,15 +48,16 @@ public class Client
 			ds.send(DpSend);
 
 			ds.receive(server_response);
-			System.out.println("Server: " + Utility.data(receive));
+			System.out.println(Utility.data(receive));
 
 
 			// break the loop if user enters "bye"
-			if (inp.equals("BYE"))
+			if (inp.equals("XAVIER"))
 				break;
 
 			// Clear the buffer after every message.
 			receive = new byte[65535];
+			System.out.println("\n-----------------------------------------------------------");
 		}
 	}
 }
