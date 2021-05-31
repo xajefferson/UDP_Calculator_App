@@ -16,7 +16,7 @@ public class Commands {
         // Send 200 OK
 
         if (l.socketAddrExists(client_socket_address)) {
-            Utility.sendResponse(client_ip, client_port, 501, "Client already exists");
+            Utility.sendResponse(client_ip, client_port, 503, "Bad sequence of commands, client already exists");
             return;
         }
 
