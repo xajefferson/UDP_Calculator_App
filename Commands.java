@@ -64,7 +64,7 @@ public class Commands {
         client.setCylinderTriggered(false);
         client.setSphereTriggered(false);
 
-        Utility.sendResponse(client.getUserIP(), client.getUserPort(), 200, "CIRCLE ready!");
+        Utility.sendResponse(client.getUserIP(), client.getUserPort(), 210, "CIRCLE ready!");
 
         l.replaceClientObject(client.getUserSocketAddress(), client);//FIXME: This may or may not work
         //TODO: Test ledger update with print statements tomorrow
@@ -89,7 +89,7 @@ public class Commands {
         client.setCylinderTriggered(false);
         client.setSphereTriggered(true);
 
-        Utility.sendResponse(client.getUserIP(), client.getUserPort(), 200, "SPHERE ready!");
+        Utility.sendResponse(client.getUserIP(), client.getUserPort(), 220, "SPHERE ready!");
         l.replaceClientObject(client.getUserSocketAddress(), client);//FIXME: This may or may not work
         return;
 
@@ -109,7 +109,7 @@ public class Commands {
         client.setCylinderTriggered(true);
         client.setSphereTriggered(false);
 
-        Utility.sendResponse(client.getUserIP(), client.getUserPort(), 200, "CYLINDER ready!");
+        Utility.sendResponse(client.getUserIP(), client.getUserPort(), 230, "CYLINDER ready!");
         l.replaceClientObject(client.getUserSocketAddress(), client);//FIXME: This may or may not work
         return;
 

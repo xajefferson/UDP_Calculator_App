@@ -20,13 +20,24 @@ public class Server
 {
 	public static void main(String[] args) throws IOException
 	{
+
+		System.out.println("Server process starting...");
+
+		File f = new File("server.conf");
+		Scanner sc = new Scanner(f);
+
+		String file_info = sc.nextLine();
+
+		int server_port  = 	Utility.parse_udp_port(file_info);
+		System.out.println("UDP port is: " + String.valueOf(server_port));
+
 		//TODO: Add code to parse server.conf
 		//TODO: add code to create ledger
 		Ledger l = new Ledger();
 		
 
 
-		int server_port  = 	1234;
+		
 
 		// Step 1 : Create a socket to listen at port 1234
 		DatagramSocket ds = new DatagramSocket(server_port);

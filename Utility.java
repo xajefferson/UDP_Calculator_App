@@ -95,10 +95,7 @@ public class Utility {
         }  else if (command[0].equals("BYE")&& (command.length == 2)) {
             System.out.println("Command was: " + command[0]);
             return "BYE";
-        } else if (command[0].equals("BYEEE")&&(command.length == 1)){
-            return "BYEEE";
-        }
-        
+        } 
         else
             return "command unrecognized";
 
@@ -130,6 +127,11 @@ public class Utility {
         }
         //System.out.println("Space not found");
         return false;
+    }
+
+    public static int parse_udp_port(String to_parse){
+        String[] udp_port = to_parse.split("=");
+        return Integer.valueOf(udp_port[1]); 
     }
 
 }
