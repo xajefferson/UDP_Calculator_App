@@ -41,6 +41,11 @@ public class Client
 		System.out.println("Server port read in: " + l2);
 		f_scan.close();
 
+		InetAddress localhost = InetAddress.getLocalHost();
+
+		String local_ip = (localhost.getHostAddress()).trim();
+        System.out.println("System IP Address : " + local_ip);
+  
 
 		// loop while user not enters "bye"
 		while (true)
@@ -65,12 +70,14 @@ public class Client
 			ds.send(DpSend);
 
 			ds.receive(server_response);
-			System.out.println(Utility.data(receive));
 
+			String rcv = String.valueOf(Utility.data(receive));
+			System.out.println("Server: " + rcv);
 
-			// break the loop if user enters "bye"
-			String[] tmp = inp.split(" ");
-			if (tmp[0].equals("BYE"))
+			String[] tmp = rcv.split(" ");
+
+			// break the loop if user enters bye OK		
+			if (tmp[0].equals("200") && tmp[1].equals("BYE"))
 				break;
 
 			// Clear the buffer after every message.

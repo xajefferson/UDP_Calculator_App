@@ -45,7 +45,7 @@ public class Ledger {
 
     public void removeClientFromLedger(SocketAddress addr){
         String removed = ht.remove(addr).toString();
-        System.out.print("Client Removed From Ledger\n----------------------------" + removed);
+        System.out.println("Client Removed From Ledger\n----------------------------\n" + removed);
     }
 
     public void printLedger(){
