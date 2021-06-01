@@ -32,8 +32,7 @@ public class Utility {
 
 
 	public static StringBuilder data(byte[] a){
-		// A utility method to convert the byte array
-		// data into a string representation.
+
 		if (a == null)
 			return null;
 		StringBuilder ret = new StringBuilder();
@@ -48,8 +47,6 @@ public class Utility {
 
 	public static String getCommand(String[] command) {
 
-
-        //System.out.println("The client's command is: " + command[0]);
 
         if (command[0].equals("HELO") && (command.length == 2)) {
             System.out.println("Command was: " + command[0]);
