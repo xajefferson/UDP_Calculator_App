@@ -1,19 +1,11 @@
 import java.net.InetAddress;
 import java.net.SocketAddress;
 
-import jdk.jshell.execution.Util;
-
-//import org.graalvm.compiler.lir.LIRInstruction.Use;
 
 public class Commands {
 
     public static void helo(InetAddress client_ip, int client_port, SocketAddress client_socket_address, Ledger l) {
         // This is where a client will be added to the ledger
-
-        // TODO: check if client already exist in ledger if they do, send 503 error, if
-        // not, create client object and add them
-        // TODO: Add them to ledger
-        // Send 200 OK
 
         if (l.socketAddrExists(client_socket_address)) {
             Utility.sendResponse(client_ip, client_port, 503, "Bad sequence of commands, client already exists");
@@ -34,7 +26,7 @@ public class Commands {
     }
 
     public static void help(User client, Ledger l) {
-        // Always check ledger for client existance
+        // Always check ledger for client existence
         if (!(l.socketAddrExists(client.getUserSocketAddress()))) {
             // If the client is not in the ledger
             Utility.sendResponse(client.getUserIP(), client.getUserPort(), 503,
@@ -51,8 +43,8 @@ public class Commands {
 
     public static void circle(String[] client_command_array, User client, Ledger l) {
 
-        // TODO: set circleTriggered in User obj to true and the other 2 to false
-        // Always check ledger for client existance
+       
+        // Always check ledger for client existence
         if (!(l.socketAddrExists(client.getUserSocketAddress()))) {
             // If the client is not in the ledger
             Utility.sendResponse(client.getUserIP(), client.getUserPort(), 503,
@@ -66,8 +58,7 @@ public class Commands {
 
         Utility.sendResponse(client.getUserIP(), client.getUserPort(), 210, "CIRCLE ready!");
 
-        l.replaceClientObject(client.getUserSocketAddress(), client);//FIXME: This may or may not work
-        //TODO: Test ledger update with print statements tomorrow
+        l.replaceClientObject(client.getUserSocketAddress(), client);
         return;
     }
 
@@ -90,7 +81,7 @@ public class Commands {
         client.setSphereTriggered(true);
 
         Utility.sendResponse(client.getUserIP(), client.getUserPort(), 220, "SPHERE ready!");
-        l.replaceClientObject(client.getUserSocketAddress(), client);//FIXME: This may or may not work
+        l.replaceClientObject(client.getUserSocketAddress(), client);
         return;
 
     }
@@ -110,15 +101,14 @@ public class Commands {
         client.setSphereTriggered(false);
 
         Utility.sendResponse(client.getUserIP(), client.getUserPort(), 230, "CYLINDER ready!");
-        l.replaceClientObject(client.getUserSocketAddress(), client);//FIXME: This may or may not work
+        l.replaceClientObject(client.getUserSocketAddress(), client);
         return;
 
     }
 
     public static void bye(String[] client_command_array, User client, Ledger l) {
         // Check if client is in the ledger if not send error msg if so
-        // TODO: Delete client from ledger
-        // Send 200
+    
 
         if (!(l.socketAddrExists(client.getUserSocketAddress()))) {
             // If the client is not in the ledger
@@ -142,8 +132,7 @@ public class Commands {
     public static void circle_area(User client, String[] array, Ledger l) {
 
         //Check if circle was called first
-
-        //store arrat[1] into var and sund that var to Utility.convertStrToDouble 
+        //store array[1] into var and sund that var to Utility.convertStrToDouble 
         //If it returns a -1 then invalid input was sent
         //Check that array[1] is is a non negative number, if it is let client know then return 
 
@@ -165,15 +154,14 @@ public class Commands {
         String calc = array[1];
         Double converted_result = Utility.convert_string_to_double(calc);
 
-        //Check if valid number was recieved
+        //Check if valid number was received
         if(converted_result <= 0){
             Utility.sendResponse(client.getUserIP(), client.getUserPort(), 501, "Syntax error in parameters or arguments");
             return;
         }
 
-        //Valud number was recieved now send response to client
+        //Valud number was received now send response to client
         String to_send = String.valueOf(Calculations.calcCircArea(converted_result));
-        //System.out.println("to send value: " + to_send);
 
         Utility.sendResponse(client.getUserIP(), client.getUserPort(), 250, to_send);
         return;
@@ -182,7 +170,7 @@ public class Commands {
 
     public static void circle_circumference(User client, String[] array, Ledger l) {
 
-        //Cleck if client is in ledger
+        //Check if client is in ledger
         if (!(l.socketAddrExists(client.getUserSocketAddress()))) {
             // If the client is not in the ledger
             Utility.sendResponse(client.getUserIP(), client.getUserPort(), 503,
@@ -206,7 +194,7 @@ public class Commands {
             return;
         }
 
-        //Valid number was recieved now send response to client
+        //Valid number was received now send response to client
         String to_send = String.valueOf(Calculations.calcCircCircumference(converted_result));
 
         Utility.sendResponse(client.getUserIP(), client.getUserPort(), 250, to_send);
@@ -236,13 +224,13 @@ public class Commands {
         String calc = array[1];
         Double converted_result = Utility.convert_string_to_double(calc);
 
-        //Check if valid number was recieved
+        //Check if valid number was received
         if(converted_result <= 0){
             Utility.sendResponse(client.getUserIP(), client.getUserPort(), 501, "Syntax error in parameters or arguments");
             return;
         }
 
-        //Valid number was recieved now send response to client
+        //Valid number was received now send response to client
         String to_send = String.valueOf(Calculations.calcSphereVolume(converted_result));
 
         Utility.sendResponse(client.getUserIP(), client.getUserPort(), 250, to_send);

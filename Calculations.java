@@ -55,7 +55,7 @@ public class Calculations {
     
 
     public static double calcCylinderArea(double radius, double height){
-        //TODO: Check this for order of operations
+        
         Double val =  2 * Math.PI * radius * height + 2 * Math.PI * (radius * radius);
 
         String a = String.format("Cylinder radius given: %f\nCylinder height given: %f", radius, height);

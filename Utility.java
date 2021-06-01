@@ -14,7 +14,6 @@ public class Utility {
 		try {
 			ds = new DatagramSocket();
 		} catch (SocketException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -27,7 +26,6 @@ public class Utility {
         try {
 			ds.send(DpSend);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }

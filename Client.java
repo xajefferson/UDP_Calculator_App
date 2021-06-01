@@ -15,6 +15,7 @@ public class Client
 		
 		Scanner sc = new Scanner(System.in);
 		DatagramSocket ds = new DatagramSocket();
+	
 
 		InetAddress server_ip;
 		int server_port ;
@@ -38,6 +39,7 @@ public class Client
 
 		System.out.println("Server IP read in: " + l1);
 		System.out.println("Server port read in: " + l2);
+		f_scan.close();
 
 
 		// loop while user not enters "bye"

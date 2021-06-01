@@ -27,7 +27,6 @@ public class Ledger {
     }
 
     public void printUserFromLedger(SocketAddress addr){
-        //TODO: check printLedger for how to wreite this 
         System.out.println(ht.get(addr).toString());
     }
 

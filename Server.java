@@ -1,18 +1,10 @@
-// Java program to illustrate Server side
-// Implementation using DatagramSocket
-import java.io.IOException; //TODO: delete this 
+import java.io.IOException; 
 import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.net.SocketException;
 import java.util.*;
-
-import jdk.jshell.execution.Util;
-
-import java.util.Scanner;
 
 
 
@@ -25,21 +17,17 @@ public class Server
 
 		File f = new File("server.conf");
 		Scanner sc = new Scanner(f);
-
 		String file_info = sc.nextLine();
-
 		int server_port  = 	Utility.parse_udp_port(file_info);
 		System.out.println("UDP port is: " + String.valueOf(server_port));
+		sc.close();
 
-		//TODO: Add code to parse server.conf
-		//TODO: add code to create ledger
+
 		Ledger l = new Ledger();
-		
-
 
 		
 
-		// Step 1 : Create a socket to listen at port 1234
+		// Create a socket to listen at specified port
 		DatagramSocket ds = new DatagramSocket(server_port);
 		byte[] receive = new byte[65535];
 
@@ -47,10 +35,10 @@ public class Server
 		while (true)
 		{
 
-			// Step 2 : create a DatagramPacket to receive the data.
+			// Create a DatagramPacket to receive the data.
 			DpReceive = new DatagramPacket(receive, receive.length);
 
-			// Step 3 : revieve the data in byte buffer.
+			// Receive the data in byte buffer.
 			ds.receive(DpReceive);
 
 			InetAddress remote_IP = DpReceive.getAddress();
