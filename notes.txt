@@ -2,5 +2,7 @@ ssh -o 'SetEnv INSTANCE="0"' xjeffer@zone.cs.siue.edu
 ssh -o 'SetEnv INSTANCE="1"' xjeffer@zone.cs.siue.edu
 ssh -o 'SetEnv INSTANCE="2"' xjeffer@zone.cs.siue.edu
 
-scp -o 'SetEnv INSTANCE="0"' Client.java xjeffer@zone.cs.siue.edu:/root
+scp -o 'SetEnv INSTANCE="0"' Calculations.java Client.java  xjeffer@zone.cs.siue.edu:/root
 scp -o 'SetEnv INSTANCE="1"' Server.java xjeffer@zone.cs.siue.edu:/root
+
+scp -o 'SetEnv INSTANCE="0"' Calculations.java Client.java Commands.java Ledger.java makefile Server.java User.java Utility.java server.conf client.conf xjeffer@zone.cs.siue.edu:/root
