@@ -9,7 +9,6 @@ public class Calculations {
 
         System.out.println(a);
         System.out.println(b);
-        //System.out.println("TEST");
         return val;
     }
 
