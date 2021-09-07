@@ -81,7 +81,7 @@ public class Client
 				break;
 
 			// Clear the buffer after every message.
-			receive = new byte[65535];
+			receive = new byte[65535]; //test
 			System.out.println("\n-----------------------------------------------------------");
 		}
 	}
